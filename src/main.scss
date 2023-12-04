@@ -1,93 +1,48 @@
+@use "./animation" as *;
+@use "./variables";
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background: linear-gradient(to right, #159957, #155799);
-    // width: 100%;
-    // height: 100vh;
-}
-
-.objects {
-    // background: linear-gradient(to right, #159957, #155799);
+    //background: linear-gradient(to right, #159957, #155799);
+    background: linear-gradient(to bottom, rgb(154, 242, 164), rgb(251, 151, 219));
     width: 100%;
     height: 100vh;
+    overflow: hidden;
+}
 
-    &__box {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
+html {
+    font-size: 16px;
+}
 
-    &__box-element {
-        position: absolute;
-        display: block;
-        list-style: none;
-        width: 25px;
-        height: 25px;
-        background: rgba(255, 255, 255, 0.2);
-        animation: animate 20s linear infinite;
-        bottom: -150px;
-        border-radius: 50%;
-    }
+@media screen and (min-width: 768px) {
 
-    &__box-element:nth-child(1) {
-        left: 86%;
-        width: 80px;
-        height: 80px;
-        animation-delay: 0s;
-    }
-
-    &__box-element:nth-child(2) {
-        left: 12%;
-        width: 30px;
-        height: 30px;
-        animation-delay: 1.5s;
-        animation-duration: 10s;
-    }
-
-    &__box-element:nth-child(3) {
-        left: 70%;
-        width: 100px;
-        height: 100px;
-        animation-delay: 5.5s;
-    }
-
-    &__box-element:nth-child(4) {
-        left: 45%;
-        width: 150px;
-        height: 150px;
-        animation-delay: 0s;
-        animation-duration: 15s;
-    }
-
-    &__box-element:nth-child(5) {
-        left: 65%;
-        width: 40px;
-        height: 40px;
-        animation-delay: 0s;
-    }
-
-    &__box-element:nth-child(6) {
-        left: 15%;
-        width: 110px;
-        height: 110px;
-        animation-delay: 3.5s;
+    html {
+        font-size: 18px;
     }
 }
 
-@keyframes animate {
-    0% {
-        transform: translateY(0) scale(0);
-    }
+@media screen and (min-width: 1024px) {
 
-    100% {
-        transform: translateY(-800px) scale(2);
-        opacity: 0;
+    html {
+        font-size: 19px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+
+    html {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 2560px) {
+
+    html {
+        font-size: 24px;
     }
 }
 
