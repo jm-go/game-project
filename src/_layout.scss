@@ -1,0 +1,69 @@
+@use "./variables" as *;
+
+.header {
+    display: flex;
+    justify-content: center;
+
+    &__title {
+        font-family: $font-headers;
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+
+    &__button {
+        margin: 0.5rem 0.9rem;
+    }
+}
+
+.game {
+
+    &__hamster {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__hamster-pic {
+        max-width: 100%;
+        height: auto;
+    }
+
+    &__hamster-lives {
+        display: flex;
+        flex-direction: column;
+        //margin-left: 0.5rem; update it when I change placehodler
+    }
+
+    &__hamster-life {
+        margin-bottom: 0.2rem;
+    }
+
+    &__word,
+    &__hint {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+
+    &__keyboard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    &__keyboard-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.3rem;
+    }
+
+    &__keyboard-button {
+        margin: 0.1rem;
+    }
+}
