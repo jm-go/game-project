@@ -1,6 +1,27 @@
 @use "./variables" as *;
 
-.game__hamster-pic {
-    width: 15rem;
-    height: auto;
+.game {
+
+    &__hamster-pic {
+        width: 15rem;
+        height: auto;
+    }
+
+    &__keyboard-button {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: white; // update with variable name
+        font-size: 1rem;
+        z-index: 1;
+
+        &:hover {
+            //hover does not work, check it later
+            background-color: rgba(255, 255, 255, 0.7);
+            cursor: pointer; //check if it works later
+        }
+    }
+
+
 }

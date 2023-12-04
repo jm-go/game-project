@@ -54,16 +54,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 1rem;
+        margin-top: 2rem;
     }
 
     &__keyboard-row {
         display: flex;
         justify-content: center;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.12rem;
     }
 
     &__keyboard-button {
-        margin: 0.1rem;
+        margin: 0.13rem;
     }
 }
