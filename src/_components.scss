@@ -1,5 +1,68 @@
 @use "./variables" as *;
 
+.header {
+
+    &__title {
+        color: $color-primary;
+    }
+}
+
+.navbar {
+
+    &__button {
+        position: relative;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: $color-primary;
+        font-size: 0.8rem;
+        z-index: 1;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(55, 137, 141, 0.463);
+            transition: left 0.5s ease; 
+            z-index: 1;
+        }
+
+        span {
+            position: relative;
+            z-index: 2;  
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &:hover:before {
+            left: 0; 
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__button-start {
+        width: 5.2rem;
+    }
+
+    &__button-info {
+        font-size: 0.8rem;
+    }
+
+    &__button-info-icon {
+        width: 0.9rem;
+        height: auto;
+    }
+}
+
 .game {
 
     &__hamster-pic {
@@ -7,20 +70,38 @@
         height: auto;
     }
 
-    &__keyboard-button {
+    &__word {
+        color: $color-primary;
+    }
+
+    &__keyboard-button,
+    &__hint-button {
         width: 1.5rem;
         height: 1.5rem;
         border: none;
         background-color: rgba(255, 255, 255, 0.3);
-        color: white; // update with variable name
+        color: $color-primary;
         font-size: 1rem;
         z-index: 1;
 
         &:hover {
-            //hover does not work, check it later
-            background-color: rgba(255, 255, 255, 0.7);
-            cursor: pointer; //check if it works later
+            background-color: rgba(55, 137, 141, 0.463);
+            cursor: pointer;
         }
+    }
+
+    &__hint-button {
+        width: 2.2rem;
+        height: 1rem;
+        font-size: 0.65rem;
+        margin-right: 0.4rem;
+        margin-top: 1rem;
+    }
+
+    &__hint-text {
+        color: $color-primary;
+        font-size: 0.65rem;
+        margin-top: 1rem;
     }
 
 
