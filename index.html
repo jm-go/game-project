@@ -8,54 +8,61 @@
   <body>
     <header class="header">
       <h1 class="header__title">Hanghamster: The Strawberry Peril</h1>
-      <nav class="navbar">
-        <button type="button" class="game-nav__button">New Game</button>
-        <button type="button" class="game-nav__button">Restart</button>
-        <button type="button" class="game-nav__button">Rules</button>
-      </nav>
     </header>
+    <nav class="navbar">
+      <button type="button" class="navbar__button navbar__button-start">
+        New Game
+      </button>
+      <button type="button" class="navbar__button navbar__button-info">
+        i
+      </button>
+    </nav>
     <main class="game">
       <section class="game__hamster">
-        <img src="./src/assets/placeholder.png" alt="Hamster" />
+        <section class="game__hamster-pic">
+          <img src="./src/assets/placeholder.png" alt="Hamster" />
+        </section>
+        <section class="game__hamster-lives">
+          <span class="game__hamster-life" alt="Icon of heart">❤️</span>
+          <span class="game__hamster-life" alt="Icon of heart">❤️</span>
+          <span class="game__hamster-life" alt="Icon of heart">❤️</span>
+          <span class="game__hamster-life" alt="Icon of heart">❤️</span>
+          <span class="game__hamster-life" alt="Icon of heart">❤️</span>
+        </section>
       </section>
-      <section class="game__hidden-letters"></section>
-      <div class="game__keyboard">
-        <button type="button" class="keyboard__button" value="A">A</button>
-        <button type="button" class="keyboard__button" value="B">B</button>
-        <button type="button" class="keyboard__button" value="C">C</button>
-        <button type="button" class="keyboard__button" value="D">D</button>
-        <button type="button" class="keyboard__button" value="E">E</button>
-        <button type="button" class="keyboard__button" value="F">F</button>
-        <button type="button" class="keyboard__button" value="G">G</button>
-        <button type="button" class="keyboard__button" value="H">H</button>
-        <button type="button" class="keyboard__button" value="I">I</button>
-        <button type="button" class="keyboard__button" value="J">J</button>
-        <button type="button" class="keyboard__button" value="K">K</button>
-        <button type="button" class="keyboard__button" value="L">L</button>
-        <button type="button" class="keyboard__button" value="M">M</button>
-        <button type="button" class="keyboard__button" value="N">N</button>
-        <button type="button" class="keyboard__button" value="O">O</button>
-        <button type="button" class="keyboard__button" value="P">P</button>
-        <button type="button" class="keyboard__button" value="Q">Q</button>
-        <button type="button" class="keyboard__button" value="R">R</button>
-        <button type="button" class="keyboard__button" value="S">S</button>
-        <button type="button" class="keyboard__button" value="T">T</button>
-        <button type="button" class="keyboard__button" value="U">U</button>
-        <button type="button" class="keyboard__button" value="V">V</button>
-        <button type="button" class="keyboard__button" value="W">W</button>
-        <button type="button" class="keyboard__button" value="X">X</button>
-        <button type="button" class="keyboard__button" value="Y">Y</button>
-        <button type="button" class="keyboard__button" value="Z">Z</button>
-      </div>
-      <div class="main__lives">
-        <span class="lives__heart" alt="Icon of heart">❤️</span>
-        <span class="lives__heart" alt="Icon of heart">❤️</span>
-        <span class="lives__heart" alt="Icon of heart">❤️</span>
-        <span class="lives__heart" alt="Icon of heart">❤️</span>
-        <span class="lives__heart" alt="Icon of heart">❤️</span>
-      </div>
-      <button type="button" class="game__hint">Hint</button>
-      <div class="game__hint-window"></div>
+      <section class="game__word"></section>
+      <section class="game__hint">
+        <button type="button" class="game__hint-button">Hint</button>
+        <output class="game__hint-text"></output>
+      </section>
+      <section class="game__keyboard">
+        <button type="button" class="game__keyboard-button" value="A">A</button>
+        <button type="button" class="game__keyboard-button" value="B">B</button>
+        <button type="button" class="game__keyboard-button" value="C">C</button>
+        <button type="button" class="game__keyboard-button" value="D">D</button>
+        <button type="button" class="game__keyboard-button" value="E">E</button>
+        <button type="button" class="game__keyboard-button" value="F">F</button>
+        <button type="button" class="game__keyboard-button" value="G">G</button>
+        <button type="button" class="game__keyboard-button" value="H">H</button>
+        <button type="button" class="game__keyboard-button" value="I">I</button>
+        <button type="button" class="game__keyboard-button" value="J">J</button>
+        <button type="button" class="game__keyboard-button" value="K">K</button>
+        <button type="button" class="game__keyboard-button" value="L">L</button>
+        <button type="button" class="game__keyboard-button" value="M">M</button>
+        <button type="button" class="game__keyboard-button" value="N">N</button>
+        <button type="button" class="game__keyboard-button" value="O">O</button>
+        <button type="button" class="game__keyboard-button" value="P">P</button>
+        <button type="button" class="game__keyboard-button" value="Q">Q</button>
+        <button type="button" class="game__keyboard-button" value="R">R</button>
+        <button type="button" class="game__keyboard-button" value="S">S</button>
+        <button type="button" class="game__keyboard-button" value="T">T</button>
+        <button type="button" class="game__keyboard-button" value="U">U</button>
+        <button type="button" class="game__keyboard-button" value="V">V</button>
+        <button type="button" class="game__keyboard-button" value="W">W</button>
+        <button type="button" class="game__keyboard-button" value="X">X</button>
+        <button type="button" class="game__keyboard-button" value="Y">Y</button>
+        <button type="button" class="game__keyboard-button" value="Z">Z</button>
+      </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
