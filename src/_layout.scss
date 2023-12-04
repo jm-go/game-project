@@ -6,8 +6,8 @@
 
     &__title {
         font-size: 1rem;
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 2.5rem;
     }
 }
 
@@ -22,24 +22,24 @@
 
 .game {
 
-    &__hamster {
+    &__hangman {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    &__hamster-pic {
+    &__hangman-pic {
         max-width: 100%;
         height: auto;
     }
 
-    &__hamster-lives {
+    &__hangman-lives {
         display: flex;
         flex-direction: column;
         //margin-left: 0.5rem; update it when I change placehodler
     }
 
-    &__hamster-life {
+    &__hangman-life {
         margin-bottom: 0.2rem;
     }
 
