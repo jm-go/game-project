@@ -11,7 +11,7 @@
 
 body {
     //background: linear-gradient(to right, #159957, #155799);
-    background: linear-gradient(to bottom, rgb(13, 64, 70), rgb(0, 0, 0));
+    background: linear-gradient(to right, #107542, #0f3c69);
     width: 100%;
     height: 100vh;
     overflow: hidden;
@@ -24,14 +24,14 @@ html {
 @media screen and (min-width: 768px) {
 
     html {
-        font-size: 19px;
+        font-size: 22px;
     }
 }
 
 @media screen and (min-width: 1024px) {
 
     html {
-        font-size: 21px;
+        font-size: 23px;
     }
 }
 
@@ -45,6 +45,6 @@ html {
 @media screen and (min-width: 2560px) {
 
     html {
-        font-size: 26px;
+        font-size: 40px;
     }
 }
