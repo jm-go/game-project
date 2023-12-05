@@ -1,8 +1,6 @@
 // Imports
 import { Word, wordsArray } from "./data";
 
-const mysteryWord = document.querySelector<HTMLSelectElement>(".game__word");
-
 /**
  * Generates a random word from the provided array of words.
  *
@@ -31,7 +29,22 @@ export const generateMysteryWord = (mysteryWord: Word): string => {
   return hiddenArray.join(" ");
 };
 
+/**
+ * Updates the displayed mystery word in the game interface.
+ * This function takes an HTML element, generates a random word using `getRandomWord`,
+ * replaces each letter with an underscore using `generateMysteryWord`,
+ * and then updates the inner HTML of the provided element with this new string.
+ *
+ * @param {HTMLElement} selectedWord - The HTML element where the mystery word is to be displayed.
+ */
+export const updateMysteryWord = (selectedWord: HTMLElement) => {
+  const randomWord = getRandomWord(wordsArray);
+  const hiddenWord = generateMysteryWord(randomWord);
+  selectedWord.innerHTML = hiddenWord;
+};
+
 //handler for new game and info
+//
 
 //handler for keyboard click
 // 1. When a button is clicked, check if the letter is in the selected word.
