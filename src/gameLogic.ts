@@ -78,8 +78,10 @@ export const startGame = (hintBox: HTMLOutputElement) => {
   currentWord = null;
   hintBox.innerHTML = "";
   // Add other functionalities
+  // keyboard's buttons status reset
 };
 
+// add comment
 export const displayInfo = (infoBox: HTMLElement) => {
   if (!activeInfo) {
     // Save the original content if it's not already saved
@@ -117,6 +119,47 @@ export const displayInfo = (infoBox: HTMLElement) => {
 //handler for keyboard click
 // 1. When a button is clicked, check if the letter is in the selected word.
 // 2. Disable the button after it's clicked to prevent repeated guesses of the same letter.
+
+export const handleKeyboardClick = (event: Event, wordBox: HTMLElement) => {
+  const target = event.currentTarget as HTMLButtonElement;
+  if (currentWord !== null) {
+    const letter = target.value.toLocaleLowerCase();
+    if (currentWord.word.includes(letter)) {
+      revealGuessedLetter(letter, currentWord, wordBox);
+    } else {
+      // incorrect guess - deduct one life
+    }
+    target.disabled = true;
+    target.style.color = "grey";
+    target.style.cursor = "default";
+    target.style.backgroundColor = "black";
+  } else {
+    console.log("currentWord is null");
+  }
+};
+
+/**
+ * Updates the displayed hidden word with the correctly guessed letter.
+ *
+ * @param {string} guessedLetter - The letter guessed by the user.
+ * @param {Word} currentWord - The current word object.
+ * @param {HTMLElement} wordBox - The HTML element with the mystery word.
+ */
+export const revealGuessedLetter = (
+  guessedLetter: string,
+  currentWord: Word,
+  wordBox: HTMLElement
+) => {
+  const word = currentWord.word;
+  let displayedWord = wordBox.innerHTML.split(" ");
+  // Replace the underscores with the guessed letter at the correct positions
+  for (let i = 0; i < word.length; i++) {
+    if (word[i].toLowerCase() === guessedLetter.toLowerCase()) {
+      displayedWord[i] = guessedLetter;
+    }
+  }
+  wordBox.innerHTML = displayedWord.join(" ");
+};
 
 //update game status
 // 1.     Keep track of correct and incorrect guesses.
