@@ -2,7 +2,9 @@
 import { Word, wordsArray } from "./data";
 
 // Global variables
-export let currentWord: Word | null = null;
+let currentWord: Word | null = null;
+let originalKeyboardContent = ""; // Variable to store original content
+let activeInfo = false; // Flag to track the state
 
 /**
  * Generates a random word from the provided array of words.
@@ -14,7 +16,6 @@ export const getRandomWord = (wordsArray: Word[]): Word => {
   const randomIndex = Math.floor(Math.random() * wordsArray.length);
   return wordsArray[randomIndex];
 };
-
 
 /**
  * Generates a string representation of the mystery word with underscores for each letter.
@@ -31,7 +32,6 @@ export const generateMysteryWord = (mysteryWord: Word): string => {
   return hiddenArray.join(" ");
 };
 
-
 /**
  * Updates the displayed mystery word in the game interface.
  * This function takes an HTML element, generates a random word using {@link getRandomWord},
@@ -46,7 +46,6 @@ export const updateMysteryWord = (wordBox: HTMLElement) => {
   const hiddenWord = generateMysteryWord(randomWord);
   wordBox.innerHTML = hiddenWord;
 };
-
 
 /**
  * Retrieves the category of the current word as a hint.
@@ -63,7 +62,6 @@ export const getHint = (): string => {
   }
 };
 
-
 /**
  * Displays a hint in the hintBox element.
  * This function calls {@link getHint} to retrieve the current word's category
@@ -75,18 +73,44 @@ export const displayHint = (hintBox: HTMLOutputElement) => {
   hintBox.innerHTML = `${getHint()}`;
 };
 
-
 // Clear content of hintBox and global variables // extend comment
 export const startGame = (hintBox: HTMLOutputElement) => {
   currentWord = null;
   hintBox.innerHTML = "";
   // Add other functionalities
-}
+};
 
+export const displayInfo = (infoBox: HTMLElement) => {
+  if (!activeInfo) {
+    // Save the original content if it's not already saved
+    if (!originalKeyboardContent) {
+      originalKeyboardContent = infoBox.innerHTML;
+    }
 
-export const displayInfo = () => {
-  const instruction: string = "placeholder";
-}
+    infoBox.innerHTML = `
+      <p><strong>How to Play Hangman</strong></p><br>
+      <ul>
+        <li>Click a <strong>New Game</strong> to begin.</li>
+        <li><strong>Guess Letters</strong> using on-screen keyboard. Each incorrect guess will deduct one life.</li>
+        <li>If you're stuck, <strong>use the Hint.</strong> Be cautious! Using a hint will cost you one life.</li>
+        <li>You <strong>win</strong> the game if you guess the word fully. Good luck!</li>
+      </ul>`;
+
+    infoBox.style.margin = "1.5rem 2rem";
+    infoBox.style.color = "white";
+    infoBox.style.fontSize = "0.65rem";
+    infoBox.style.textAlign = "justify";
+    activeInfo = true;
+  } else {
+    // Restore the original content
+    infoBox.innerHTML = originalKeyboardContent;
+    infoBox.style.removeProperty("margin");
+    infoBox.style.removeProperty("color");
+    infoBox.style.removeProperty("fontSize");
+    infoBox.style.removeProperty("textAlign");
+    activeInfo = false; // Reset the flag
+  }
+};
 
 //handler for new game and info
 
