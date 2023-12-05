@@ -2,7 +2,7 @@
 import { Word, wordsArray } from "./data";
 
 // Global variables
-export let currentWord : Word | null = null;
+export let currentWord: Word | null = null;
 
 /**
  * Generates a random word from the provided array of words.
@@ -14,6 +14,7 @@ export const getRandomWord = (wordsArray: Word[]): Word => {
   const randomIndex = Math.floor(Math.random() * wordsArray.length);
   return wordsArray[randomIndex];
 };
+
 
 /**
  * Generates a string representation of the mystery word with underscores for each letter.
@@ -30,6 +31,7 @@ export const generateMysteryWord = (mysteryWord: Word): string => {
   return hiddenArray.join(" ");
 };
 
+
 /**
  * Updates the displayed mystery word in the game interface.
  * This function takes an HTML element, generates a random word using {@link getRandomWord},
@@ -44,6 +46,7 @@ export const updateMysteryWord = (wordBox: HTMLElement) => {
   const hiddenWord = generateMysteryWord(randomWord);
   wordBox.innerHTML = hiddenWord;
 };
+
 
 /**
  * Retrieves the category of the current word as a hint.
@@ -60,12 +63,32 @@ export const getHint = (): string => {
   }
 };
 
+
+/**
+ * Displays a hint in the hintBox element.
+ * This function calls {@link getHint} to retrieve the current word's category
+ * and updates the innerHTML of the hint output element.
+ *
+ * @param {HTMLOutputElement} hintBox - The HTML output element where the hint is to be displayed.
+ */
 export const displayHint = (hintBox: HTMLOutputElement) => {
   hintBox.innerHTML = `${getHint()}`;
+};
+
+
+// Clear content of hintBox and global variables // extend comment
+export const startGame = (hintBox: HTMLOutputElement) => {
+  currentWord = null;
+  hintBox.innerHTML = "";
+  // Add other functionalities
+}
+
+
+export const displayInfo = () => {
+  const instruction: string = "placeholder";
 }
 
 //handler for new game and info
-// clear hint content and global vars 
 
 //handler for keyboard click
 // 1. When a button is clicked, check if the letter is in the selected word.
