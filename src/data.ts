@@ -1,9 +1,9 @@
-export type Words = {
+export type Word = {
   word: string;
   category: string;
 };
 
-export const wordsArray: Words[] = [
+export const wordsArray: Word[] = [
   { word: "ocean", category: "Nature" },
   { word: "puzzle", category: "Objects" },
   { word: "guitar", category: "Music" },

@@ -1,5 +1,7 @@
 // Imports
-import { Words, wordsArray } from "./data";
+import { Word, wordsArray } from "./data";
+
+const mysteryWord = document.querySelector<HTMLSelectElement>(".game__word");
 
 /**
  * Generates a random word from the provided array of words.
@@ -7,12 +9,27 @@ import { Words, wordsArray } from "./data";
  * @param {Words[]} wordsArray - An array of word objects, each containing a 'word' and a 'category'.
  * @returns {Words} An object containing a randomly selected word and its category.
  */
-export const getRandomWord = (wordsArray: Words[]): Words => {
+export const getRandomWord = (wordsArray: Word[]): Word => {
   const randomIndex = Math.floor(Math.random() * wordsArray.length);
   return wordsArray[randomIndex];
 };
 
-//function to display the word with underscores for each letter
+/**
+ * Generates a string representation of the mystery word with underscores for each letter.
+ * This function takes a 'Word' object and returns a string where each letter is replaced
+ *  by an underscore.
+ *
+ * @param {Word} mysteryWord - An object containing the word to be hidden.
+ * @returns {string} A string with underscores for each letter of the mystery word.
+ */
+export const generateMysteryWord = (mysteryWord: Word): string => {
+  const wordAsArray = mysteryWord.word.split("");
+  const hiddenArray = wordAsArray.map((letter) => {
+    letter = "_";
+    return letter;
+  });
+  return hiddenArray.join(" ");
+};
 
 //handler for new game and info
 
