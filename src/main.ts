@@ -7,6 +7,7 @@ import {
   startGame,
   displayInfo,
   handleKeyboardClick,
+  resetKeyboard
 } from "./gameLogic";
 
 // Selectors
@@ -40,16 +41,17 @@ if (
 }
 
 // Event listeners
-newGame.addEventListener("click", () => updateMysteryWord(mysteryWord));
+newGame.addEventListener("click", () => updateMysteryWord(mysteryWord)); // Change it later to one listener
 
 hintButton.addEventListener("click", () => {
   displayHint(hintBox);
 });
 
-// newGame.addEventListener("click", () => {
-//   startGame(hintBox);
-//   // Add other functions necessary to run the game
-// });
+newGame.addEventListener("click", () => {
+  //startGame(hintBox);
+  resetKeyboard(keyboardButtons);
+  // Add other functions necessary to run the game
+});
 
 infoButton.addEventListener("click", () => {
   displayInfo(keyboardContainer);
