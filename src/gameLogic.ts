@@ -3,8 +3,11 @@ import { Word, wordsArray } from "./data";
 
 // Global variables
 let currentWord: Word | null = null;
-let originalKeyboardContent = ""; // Variable to store original content
 let activeInfo = false; // Flag to track the state
+export let playerLives: number = 5;
+let mysteryWordTracker: string = "";
+let gameOver = false;
+let playerWon = false;
 
 /**
  * Generates a random word from the provided array of words.
@@ -45,6 +48,7 @@ export const updateMysteryWord = (wordBox: HTMLElement) => {
   currentWord = randomWord; // Update the global variable
   const hiddenWord = generateMysteryWord(randomWord);
   wordBox.innerHTML = hiddenWord;
+  mysteryWordTracker = hiddenWord;
 };
 
 /**
@@ -74,12 +78,28 @@ export const displayHint = (hintBox: HTMLOutputElement) => {
 };
 
 // TO DO!!
-// Clear content of hintBox and global variables //  work in progress
-export const startGame = (hintBox: HTMLOutputElement) => {
-  currentWord = null;
-  hintBox.innerHTML = "";
+export const startGame = (
+  hintBox: HTMLOutputElement,
+  keyboard: NodeListOf<HTMLButtonElement>,
+  wordBox: HTMLElement,
+  livesContainer: NodeListOf<HTMLElement>
+) => {
+  updateMysteryWord(wordBox);
+  playerLives = 5;
+  hintBox.textContent = "";
+  gameOver = false;
+  playerWon = false;
+  resetKeyboard(keyboard);
+  restartLives(livesContainer);
+
   // Add other functionalities
-  // keyboard's buttons status reset
+  // keyboard's buttons status reset - function done
+};
+
+const restartLives = (livesContainer: NodeListOf<HTMLElement>) => {
+  livesContainer.forEach((element) => {
+    element.textContent = `💚`;
+  });
 };
 
 /**
@@ -110,11 +130,26 @@ export const displayInfo = (
   }
 };
 
-//handler for new game and info
-
-//handler for keyboard click
-// 1. When a button is clicked, check if the letter is in the selected word.
-// 2. Disable the button after it's clicked to prevent repeated guesses of the same letter.
+export const displayWinOrLoseMessage = (
+  keyboardButtons: NodeListOf<HTMLButtonElement>,
+  displayBox: HTMLElement
+) => {
+  if (gameOver) {
+    // displayBox.innerHTML = `You lost!`;
+    displayBox.style.display = "flex";
+    keyboardButtons.forEach((button) => {
+      button.style.display = "none";
+    });
+  } else if (playerWon) {
+    // displayBox.innerHTML = `Congratulations, you won!`;
+    displayBox.style.display = "flex";
+    keyboardButtons.forEach((button) => {
+      button.style.display = "none";
+    });
+  } else {
+    displayBox.style.display = "none";
+  }
+};
 
 /**
  * Handles the click event on the keyboard buttons.
@@ -126,14 +161,20 @@ export const displayInfo = (
  * @param {Event} event - The click event triggered by clicking a keyboard button.
  * @param {HTMLElement} wordBox - The HTML element where the mystery word is displayed.
  */
-export const handleKeyboardClick = (event: Event, wordBox: HTMLElement) => {
+export const handleKeyboardClick = (
+  event: Event,
+  wordBox: HTMLElement,
+  livesContainer: NodeListOf<HTMLElement>
+) => {
   const target = event.currentTarget as HTMLButtonElement;
   if (currentWord !== null) {
     const letter = target.value.toLocaleLowerCase();
     if (currentWord.word.includes(letter)) {
       revealGuessedLetter(letter, currentWord, wordBox);
     } else {
-      // incorrect guess - deduct one life
+      playerLives -= 1;
+      livesContainer[playerLives].textContent = ""; //this is broken, I can't use innerHTML
+      trackGameStatus(playerLives);
     }
     target.disabled = true;
     target.style.opacity = "0%";
@@ -164,6 +205,7 @@ export const revealGuessedLetter = (
     }
   }
   wordBox.innerHTML = displayedWord.join(" ");
+  mysteryWordTracker = wordBox.innerHTML;
 };
 
 /**
@@ -179,6 +221,35 @@ export const resetKeyboard = (keyboard: NodeListOf<HTMLButtonElement>) => {
     button.style.removeProperty("opacity");
     button.style.removeProperty("cursor");
   });
+};
+
+const trackGameStatus = (life: number) => {
+  if (life === 5) {
+    //hangman pic 1
+  }
+  if (life === 4) {
+    //hangman pic 1
+  }
+  if (life === 3) {
+    //hangman pic 1
+  }
+  if (life === 2) {
+    //hangman pic 1
+  }
+  if (life === 1) {
+    //hangman pic 1
+  }
+  if (life === 0) {
+    gameOver = true;
+  } else {
+    trackProgress();
+  }
+};
+
+const trackProgress = () => {
+  if (!mysteryWordTracker.includes("_")) {
+    playerWon = true;
+  }
 };
 
 //update game status

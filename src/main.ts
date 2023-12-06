@@ -2,12 +2,11 @@
 import "./main.scss";
 // "../style.css"; check later which import should stay here
 import {
-  updateMysteryWord,
   displayHint,
-  startGame,
   displayInfo,
   handleKeyboardClick,
-  resetKeyboard,
+  startGame,
+  displayWinOrLoseMessage,
 } from "./gameLogic";
 
 // Selectors
@@ -28,6 +27,12 @@ const keyboardButtons = document.querySelectorAll<HTMLButtonElement>(
 );
 const wordBox = document.querySelector<HTMLElement>(".game__word");
 const instructions = document.querySelector<HTMLElement>(".game__instructions");
+const livesContainer = document.querySelectorAll<HTMLElement>(
+  ".game__hangman-lives"
+);
+const singleLife = document.querySelectorAll<HTMLElement>(
+  ".game__hangman-life"
+);
 
 // Handle errors for selectors
 if (
@@ -39,31 +44,34 @@ if (
   !keyboardContainer ||
   !keyboardButtons ||
   !wordBox ||
-  !instructions
+  !instructions ||
+  !livesContainer ||
+  !singleLife
 ) {
   throw new Error("Issue with the selector.");
 }
 
 // Event listeners
-newGame.addEventListener("click", () => updateMysteryWord(mysteryWord)); // Change it later to one listener
-
 hintButton.addEventListener("click", () => {
   displayHint(hintBox);
 });
 
 newGame.addEventListener("click", () => {
-  //startGame(hintBox);
-  resetKeyboard(keyboardButtons);
-  // Add other functions necessary to run the game
+  startGame(hintBox, keyboardButtons, wordBox, singleLife);
 });
 
 infoButton.addEventListener("click", () => {
   displayInfo(keyboardButtons, instructions);
-  // Finish implementation
 });
 
 keyboardButtons.forEach((button) => {
   button.addEventListener("click", (event) =>
-    handleKeyboardClick(event, wordBox)
+    handleKeyboardClick(event, wordBox, singleLife)
+  );
+});
+
+keyboardButtons.forEach((button) => {
+  button.addEventListener("click", () =>
+    displayWinOrLoseMessage(keyboardButtons, instructions)
   );
 });
