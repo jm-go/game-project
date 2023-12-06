@@ -83,43 +83,30 @@ export const startGame = (hintBox: HTMLOutputElement) => {
 };
 
 /**
- * Toggles the display of the game instructions in the infoBox.
- * When called, it replaces the content of infoBox (keyboard) with the game instructions
- * or restores its original content, based on the current state.
- * It also applies or removes specific styles to the infoBox when displaying the instructions.
- * The state is tracked using the 'activeInfo' flag.
+ * Toggles the display of game instructions and keyboard buttons.
+ * When active, it shows the instructions and hides the keyboard buttons.
+ * When not, it hides the instructions and shows the keyboard buttons.
+ * The function uses the {@link activeInfo} flag to track the toggle state.
  *
- * @param {HTMLElement} infoBox - The HTML element where the game instructions are displayed.
+ * @param {NodeListOf<HTMLButtonElement>} keyboardButtons - All keyboard button elements.
+ * @param {HTMLElement} instructions - The HTML element with game instructions.
  */
-export const displayInfo = (infoBox: HTMLElement) => {
+export const displayInfo = (
+  keyboardButtons: NodeListOf<HTMLButtonElement>,
+  instructions: HTMLElement
+) => {
   if (!activeInfo) {
-    // Save the original content if it's not already saved
-    if (!originalKeyboardContent) {
-      originalKeyboardContent = infoBox.innerHTML;
-    }
-
-    infoBox.innerHTML = `
-      <p><strong>How to Play Hangman</strong></p><br>
-      <ul>
-        <li>Click a <strong>New Game</strong> to begin.</li>
-        <li><strong>Guess Letters</strong> using on-screen keyboard. Each incorrect guess will deduct one life.</li>
-        <li>If you're stuck, <strong>use the Hint.</strong> Be cautious! Using a hint will cost you one life.</li>
-        <li>You <strong>win</strong> the game if you guess the word fully. Good luck!</li>
-      </ul>`;
-
-    infoBox.style.margin = "1.5rem 2rem";
-    infoBox.style.color = "white";
-    infoBox.style.fontSize = "0.65rem";
-    infoBox.style.textAlign = "justify";
+    instructions.style.display = "flex";
     activeInfo = true;
+    keyboardButtons.forEach((button) => {
+      button.style.display = "none";
+    });
   } else {
-    // Restore the original content
-    infoBox.innerHTML = originalKeyboardContent;
-    infoBox.style.removeProperty("margin");
-    infoBox.style.removeProperty("color");
-    infoBox.style.removeProperty("fontSize");
-    infoBox.style.removeProperty("textAlign");
-    activeInfo = false; // Reset the flag
+    instructions.style.display = "none";
+    keyboardButtons.forEach((button) => {
+      button.style.display = "";
+    });
+    activeInfo = false;
   }
 };
 

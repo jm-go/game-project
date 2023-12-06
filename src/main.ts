@@ -7,7 +7,7 @@ import {
   startGame,
   displayInfo,
   handleKeyboardClick,
-  resetKeyboard
+  resetKeyboard,
 } from "./gameLogic";
 
 // Selectors
@@ -23,8 +23,11 @@ const infoButton = document.querySelector<HTMLButtonElement>(
 );
 const keyboardContainer =
   document.querySelector<HTMLElement>(".game__keyboard");
-const keyboardButtons = document.querySelectorAll<HTMLButtonElement>(".game__keyboard-button");
+const keyboardButtons = document.querySelectorAll<HTMLButtonElement>(
+  ".game__keyboard-button"
+);
 const wordBox = document.querySelector<HTMLElement>(".game__word");
+const instructions = document.querySelector<HTMLElement>(".game__instructions");
 
 // Handle errors for selectors
 if (
@@ -35,7 +38,8 @@ if (
   !infoButton ||
   !keyboardContainer ||
   !keyboardButtons ||
-  !wordBox
+  !wordBox ||
+  !instructions
 ) {
   throw new Error("Issue with the selector.");
 }
@@ -54,10 +58,12 @@ newGame.addEventListener("click", () => {
 });
 
 infoButton.addEventListener("click", () => {
-  displayInfo(keyboardContainer);
+  displayInfo(keyboardButtons, instructions);
   // Finish implementation
 });
 
 keyboardButtons.forEach((button) => {
-  button.addEventListener("click", (event) => handleKeyboardClick(event, wordBox));
+  button.addEventListener("click", (event) =>
+    handleKeyboardClick(event, wordBox)
+  );
 });
