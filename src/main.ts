@@ -58,11 +58,11 @@ if (
 
 // Event listeners
 hintButton.addEventListener("click", () => {
-  displayHint(hintBox, singleLife);
+  displayHint(hintBox, singleLife, hintButton);
 });
 
 newGame.addEventListener("click", () => {
-  startGame(hintBox, keyboardButtons, wordBox, singleLife, messageBox);
+  startGame(hintBox, keyboardButtons, wordBox, singleLife, messageBox, hintButton);
 });
 
 infoButton.addEventListener("click", () => {

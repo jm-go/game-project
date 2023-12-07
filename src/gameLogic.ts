@@ -75,13 +75,17 @@ export const getHint = (): string => {
  */
 export const displayHint = (
   hintBox: HTMLOutputElement,
-  livesContainer: NodeListOf<HTMLElement>
+  livesContainer: NodeListOf<HTMLElement>,
+  hintButton: HTMLButtonElement
 ) => {
   hintBox.innerHTML = `${getHint()}`;
   if (currentWord !== null) {
     playerLives -= 1;
     livesContainer[playerLives].textContent = "";
     trackPlayerLives(playerLives);
+    hintButton.disabled = true;
+    hintButton.style.opacity = "70%";
+    hintButton.style.cursor = "default";
   }
 };
 
@@ -91,7 +95,8 @@ export const startGame = (
   keyboard: NodeListOf<HTMLButtonElement>,
   wordBox: HTMLElement,
   livesContainer: NodeListOf<HTMLElement>,
-  messageBox: HTMLElement
+  messageBox: HTMLElement,
+  hintButton: HTMLButtonElement
 ) => {
   updateMysteryWord(wordBox);
   playerLives = 5;
@@ -101,6 +106,9 @@ export const startGame = (
   messageBox.textContent = ``;
   resetKeyboard(keyboard);
   restartLives(livesContainer);
+  hintButton.disabled = false;
+  hintButton.style.removeProperty("opacity");
+  hintButton.style.cursor = "pointer";
 };
 
 /**
