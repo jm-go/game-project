@@ -70,6 +70,7 @@ export const getHint = (): string => {
  * Displays a hint in the hintBox element.
  * This function calls {@link getHint} to retrieve the current word's category
  * and updates the innerHTML of the hint output element.
+ * It also deducts player's life and disables hint button.
  *
  * @param {HTMLOutputElement} hintBox - The HTML output element where the hint is to be displayed.
  */
@@ -134,16 +135,19 @@ const restartLives = (livesContainer: NodeListOf<HTMLElement>) => {
  */
 export const displayInfo = (
   keyboardButtons: NodeListOf<HTMLButtonElement>,
-  instructions: HTMLElement
+  instructions: HTMLElement,
+  messageBox: HTMLElement
 ) => {
   if (!activeInfo) {
     instructions.style.display = "flex";
+    messageBox.style.display = "none";
     activeInfo = true;
     keyboardButtons.forEach((button) => {
       button.style.display = "none";
     });
   } else {
     instructions.style.display = "none";
+    messageBox.style.display = "flex";
     keyboardButtons.forEach((button) => {
       button.style.display = "";
     });
@@ -178,13 +182,17 @@ export const displayEndMessage = (messageBox: HTMLElement) => {
 export const handleKeyboardClick = (
   event: Event,
   wordBox: HTMLElement,
-  livesContainer: NodeListOf<HTMLElement>
+  livesContainer: NodeListOf<HTMLElement>,
+  messageBox: HTMLElement
 ) => {
   const target = event.currentTarget as HTMLButtonElement;
   if (currentWord !== null) {
     const letter = target.value.toLocaleLowerCase();
     if (currentWord.word.includes(letter)) {
       revealGuessedLetter(letter, currentWord, wordBox);
+      if (playerWon) {
+        displayEndMessage(messageBox);
+      }
     } else {
       playerLives -= 1;
       livesContainer[playerLives].textContent = "";
@@ -220,6 +228,7 @@ export const revealGuessedLetter = (
   }
   wordBox.innerHTML = displayedWord.join(" ");
   mysteryWordTracker = wordBox.innerHTML;
+  trackProgress();
 };
 
 /**

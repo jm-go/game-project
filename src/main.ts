@@ -66,12 +66,12 @@ newGame.addEventListener("click", () => {
 });
 
 infoButton.addEventListener("click", () => {
-  displayInfo(keyboardButtons, instructions);
+  displayInfo(keyboardButtons, instructions, messageBox);
 });
 
 keyboardButtons.forEach((button) => {
   button.addEventListener("click", (event) =>
-    handleKeyboardClick(event, wordBox, singleLife)
+    handleKeyboardClick(event, wordBox, singleLife, messageBox)
   );
 });
 
