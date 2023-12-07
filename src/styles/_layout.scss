@@ -5,7 +5,7 @@
     justify-content: center;
 
     &__title {
-        margin-top: 0.5rem;
+        margin-top: 1rem;
         margin-bottom: 1.5rem;
     }
 }
@@ -23,6 +23,7 @@
 
     &__hangman {
         display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
     }
@@ -30,11 +31,15 @@
     &__hangman-pic {
         max-width: 100%;
         height: auto;
+        padding-left: 2rem;
+        margin-right: 1rem;
     }
 
     &__hangman-lives {
         display: flex;
         flex-direction: column;
+        min-width: 1.8rem;
+        align-items: flex-start;
     }
 
     &__hangman-life {

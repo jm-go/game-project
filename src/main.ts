@@ -1,13 +1,11 @@
 // Imports
 import "./main.scss";
-// "../style.css"; check later which import should stay here
 import {
   displayHint,
   displayInfo,
   handleKeyboardClick,
   startGame,
   displayEndMessage,
-  playerLives,
 } from "./gameLogic";
 
 // Selectors
@@ -34,9 +32,8 @@ const livesContainer = document.querySelectorAll<HTMLElement>(
 const singleLife = document.querySelectorAll<HTMLElement>(
   ".game__hangman-life"
 );
-const messageBox = document.querySelector<HTMLElement>(
-  ".game__message"
-);
+const messageBox = document.querySelector<HTMLElement>(".game__message");
+const hangmanPicture = document.querySelector<HTMLElement>(".game__hangman-image");
 
 // Handle errors for selectors
 if (
@@ -51,18 +48,27 @@ if (
   !instructions ||
   !livesContainer ||
   !singleLife ||
-  !messageBox
+  !messageBox ||
+  !hangmanPicture
 ) {
   throw new Error("Issue with the selector.");
 }
 
 // Event listeners
 hintButton.addEventListener("click", () => {
-  displayHint(hintBox, singleLife, hintButton);
+  displayHint(hintBox, singleLife, hintButton, hangmanPicture);
 });
 
 newGame.addEventListener("click", () => {
-  startGame(hintBox, keyboardButtons, wordBox, singleLife, messageBox, hintButton);
+  startGame(
+    hintBox,
+    keyboardButtons,
+    wordBox,
+    singleLife,
+    messageBox,
+    hintButton,
+    hangmanPicture
+  );
 });
 
 infoButton.addEventListener("click", () => {
@@ -71,13 +77,12 @@ infoButton.addEventListener("click", () => {
 
 keyboardButtons.forEach((button) => {
   button.addEventListener("click", (event) =>
-    handleKeyboardClick(event, wordBox, singleLife, messageBox)
+    handleKeyboardClick(event, wordBox, singleLife, messageBox, hangmanPicture)
   );
 });
 
 keyboardButtons.forEach((button) => {
-  button.addEventListener("click", () =>
-    displayEndMessage(messageBox));
+  button.addEventListener("click", () => displayEndMessage(messageBox));
 });
 
 hintButton.addEventListener("click", () => displayEndMessage(messageBox));

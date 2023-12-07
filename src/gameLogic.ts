@@ -1,9 +1,9 @@
 // Imports
-import { Word, wordsArray } from "./data";
+import { Word, wordsArray, hangmanImages } from "./data";
 
 // Global variables
 let currentWord: Word | null = null;
-let activeInfo = false; // Flag to track the state
+let activeInfo = false; // Flag to track the state of infoBox
 export let playerLives: number = 5;
 let mysteryWordTracker: string = "";
 let gameOver = false;
@@ -12,8 +12,8 @@ let playerWon = false;
 /**
  * Generates a random word from the provided array of words.
  *
- * @param {Words[]} wordsArray - An array of word objects, each containing a 'word' and a 'category'.
- * @returns {Words} An object containing a randomly selected word and its category.
+ * @param {Words[]} wordsArray - An array of word objects, each containing a 'word' and a 'hint'.
+ * @returns {Words} An object containing a randomly selected word and its hint.
  */
 export const getRandomWord = (wordsArray: Word[]): Word => {
   const randomIndex = Math.floor(Math.random() * wordsArray.length);
@@ -41,7 +41,7 @@ export const generateMysteryWord = (mysteryWord: Word): string => {
  * replaces each letter with an underscore using {@link generateMysteryWord},
  * and updates the inner HTML of the element with this new string.
  *
- * @param {HTMLElement} wordBox - The HTML element where the mystery word is to be displayed.
+ * @param {HTMLElement} wordBox - The HTML element where the mystery word is displayed.
  */
 export const updateMysteryWord = (wordBox: HTMLElement) => {
   const randomWord = getRandomWord(wordsArray);
@@ -52,15 +52,15 @@ export const updateMysteryWord = (wordBox: HTMLElement) => {
 };
 
 /**
- * Retrieves the category of the current word as a hint.
- * This function checks if a current word is set and returns its category as a hint.
+ * Retrieves the hint for the current word.
+ * This function checks if a current word is set and returns its hint as a hint.
  * Otherwise, it returns a default message indicating that no word is available.
  *
- * @returns {string} The category of the current word as a hint, or a default message.
+ * @returns {string} The hint for the current word, or a default message.
  */
 export const getHint = (): string => {
   if (currentWord) {
-    return currentWord.category;
+    return currentWord.hint;
   } else {
     return "No word selected yet.";
   }
@@ -68,22 +68,25 @@ export const getHint = (): string => {
 
 /**
  * Displays a hint in the hintBox element.
- * This function calls {@link getHint} to retrieve the current word's category
+ * This function calls {@link getHint} to retrieve the current word's hint
  * and updates the innerHTML of the hint output element.
  * It also deducts player's life and disables hint button.
  *
+ * @param finish comment
+ * @param finish comment
  * @param {HTMLOutputElement} hintBox - The HTML output element where the hint is to be displayed.
  */
 export const displayHint = (
   hintBox: HTMLOutputElement,
   livesContainer: NodeListOf<HTMLElement>,
-  hintButton: HTMLButtonElement
+  hintButton: HTMLButtonElement,
+  hangmanPicture: HTMLElement
 ) => {
   hintBox.innerHTML = `${getHint()}`;
   if (currentWord !== null) {
     playerLives -= 1;
     livesContainer[playerLives].textContent = "";
-    trackPlayerLives(playerLives);
+    trackPlayerLives(playerLives, hangmanPicture);
     hintButton.disabled = true;
     hintButton.style.opacity = "70%";
     hintButton.style.cursor = "default";
@@ -97,19 +100,21 @@ export const startGame = (
   wordBox: HTMLElement,
   livesContainer: NodeListOf<HTMLElement>,
   messageBox: HTMLElement,
-  hintButton: HTMLButtonElement
+  hintButton: HTMLButtonElement,
+  hangmanPicture: HTMLElement
 ) => {
   updateMysteryWord(wordBox);
   playerLives = 5;
   hintBox.textContent = "";
   gameOver = false;
   playerWon = false;
-  messageBox.textContent = ``;
+  messageBox.textContent = "";
   resetKeyboard(keyboard);
   restartLives(livesContainer);
   hintButton.disabled = false;
   hintButton.style.removeProperty("opacity");
   hintButton.style.cursor = "pointer";
+  hangmanPicture.innerHTML = `<img class="game__hangman-pic" src="${hangmanImages[playerLives]}" alt="Hangman" />`;
 };
 
 /**
@@ -183,7 +188,8 @@ export const handleKeyboardClick = (
   event: Event,
   wordBox: HTMLElement,
   livesContainer: NodeListOf<HTMLElement>,
-  messageBox: HTMLElement
+  messageBox: HTMLElement,
+  hangmanPicture: HTMLElement
 ) => {
   if (playerWon || gameOver) {
     return;
@@ -199,7 +205,7 @@ export const handleKeyboardClick = (
     } else {
       playerLives -= 1;
       livesContainer[playerLives].textContent = "";
-      trackPlayerLives(playerLives);
+      trackPlayerLives(playerLives, hangmanPicture);
     }
     target.disabled = true;
     target.style.opacity = "0%";
@@ -250,34 +256,17 @@ export const resetKeyboard = (keyboard: NodeListOf<HTMLButtonElement>) => {
 };
 
 // Add comment
-const trackPlayerLives = (life: number) => {
-  switch (life) {
-    case 5:
-      //hangman pic for 5 lives
-      trackProgress();
-      break;
-    case 4:
-      //hangman pic for 4 lives
-      trackProgress();
-      break;
-    case 3:
-      //hangman pic for 3 lives
-      trackProgress();
-      break;
-    case 2:
-      //hangman pic for 2 lives
-      trackProgress();
-      break;
-    case 1:
-      //hangman pic for 1 life
-      trackProgress();
-      break;
-    case 0:
-      gameOver = true; // Set game over flag
-      break;
-    default:
-      trackProgress();
-      break;
+const trackPlayerLives = (life: number, hangmanPicture: HTMLElement) => {
+  const imageNumber = hangmanImages[life];
+  if (imageNumber) {
+    hangmanPicture.innerHTML = `<img class="game__hangman-pic" src="${hangmanImages[life]}" alt="Hangman" />`;
+  }
+
+  if (life > 0) {
+    trackProgress();
+  } 
+  else {
+    gameOver = true;
   }
 };
 

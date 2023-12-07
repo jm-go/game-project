@@ -1,7 +1,7 @@
-@use "./animation" as *;
-@use "./variables" as *;
-@use "./layout";
-@use "./components";
+@use "./styles/animation" as *;
+@use "./styles/variables" as *;
+@use "./styles/layout";
+@use "./styles/components";
 
 * {
     margin: 0;
