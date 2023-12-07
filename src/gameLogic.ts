@@ -2,12 +2,12 @@
 import { Word, wordsArray, hangmanImages, OnScreenMessages } from "./data/data";
 
 // Global variables
-let currentWord: Word | null = null;
-let activeInfo = false; // Flag to track the state of infoBox
-export let playerLives: number = 5;
-let mysteryWordTracker: string = "";
-let gameOver = false;
-let playerWon = false;
+let currentWord: Word | null = null; // Holds the current word object from the words array.
+let activeInfo = false; // Tracks whether the info overlay is active.
+export let playerLives: number = 5; // Player's remaining lives, initialised to 5.
+let mysteryWordTracker: string = ""; // Tracks the current state of the displayed mystery word.
+let gameOver = false; // Flag to indicate if the game is over.
+let playerWon = false; // Flag to indicate if the player has won.
 
 /**
  * Generates a random word from the provided array of words.
