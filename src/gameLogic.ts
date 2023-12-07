@@ -1,5 +1,5 @@
 // Imports
-import { Word, wordsArray, hangmanImages } from "./data";
+import { Word, wordsArray, hangmanImages, OnScreenMessages } from "./data";
 
 // Global variables
 let currentWord: Word | null = null;
@@ -167,10 +167,10 @@ export const displayInfo = (
  */
 export const displayEndMessage = (messageBox: HTMLElement) => {
   if (playerWon) {
-    messageBox.textContent = `Congratulations, you won!`;
+    messageBox.textContent = OnScreenMessages.SUCCESS;
   }
   if (gameOver) {
-    messageBox.textContent = `You lost!`;
+    messageBox.textContent = OnScreenMessages.FAILURE;
   }
 };
 

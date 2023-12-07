@@ -48,3 +48,8 @@ export const hangmanImages: HangmanImages = {
   1: "./src/assets/hangman-1.png",
   0: "./src/assets/hangman-0.png",
 };
+
+export enum OnScreenMessages {
+  SUCCESS = `Congratulations, you won!`,
+  FAILURE = `You lost!`,
+}
