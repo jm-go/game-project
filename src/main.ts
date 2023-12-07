@@ -56,7 +56,7 @@ if (
 
 // Event listeners
 hintButton.addEventListener("click", () => {
-  displayHint(hintBox, singleLife, hintButton, hangmanPicture);
+  displayHint(hintBox, singleLife, hintButton, hangmanPicture, wordBox);
 });
 
 newGame.addEventListener("click", () => {
