@@ -7,11 +7,11 @@
   </head>
   <body>
     <header class="header">
-      <h1 class="header__title">Hangman</h1>
+      <h1 class="header__title">.Hangman.</h1>
     </header>
     <nav class="navbar">
       <button type="button" class="navbar__button navbar__button-start">
-        <span>New Game</span>
+        <span>NEW GAME</span>
       </button>
       <button type="button" class="navbar__button navbar__button-info">
         <span
@@ -27,7 +27,7 @@
         <section class="game__hangman-image">
           <img
             class="game__hangman-pic"
-            src="./src/assets/hangman1.png"
+            src="./src/assets/hangman-5.png"
             alt="Hangman"
           />
         </section>
@@ -41,10 +41,29 @@
       </section>
       <section class="game__word"></section>
       <section class="game__hint">
-        <button type="button" class="game__hint-button">Hint</button>
+        <button type="button" class="game__hint-button">HINT</button>
         <output class="game__hint-text"></output>
       </section>
       <section class="game__keyboard">
+        <section class="game__instructions" style="display: none">
+          <p><strong>How to Play Hangman</strong></p>
+          <br />
+          <ul>
+            <li>Click a <strong>New Game</strong> to begin.</li>
+            <li>
+              <strong>Guess Letters</strong> using on-screen keyboard. Each
+              incorrect guess will deduct one life.
+            </li>
+            <li>
+              If you're stuck, <strong>use the Hint.</strong> Be cautious! Using
+              a hint will cost you one life.
+            </li>
+            <li>
+              You <strong>win</strong> the game if you guess the word fully.
+              Good luck!
+            </li>
+          </ul>
+        </section>
         <section class="game__keyboard-row">
           <button type="button" class="game__keyboard-button" value="A">
             A
@@ -130,6 +149,7 @@
           </button>
         </section>
       </section>
+      <section class="game__message"></section>
     </main>
     <div class="objects">
       <ul class="objects__box">

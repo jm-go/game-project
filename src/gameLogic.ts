@@ -1,16 +1,19 @@
 // Imports
-import { Word, wordsArray } from "./data";
+import { Word, wordsArray, hangmanImages, OnScreenMessages } from "./data";
 
 // Global variables
 let currentWord: Word | null = null;
-let originalKeyboardContent = ""; // Variable to store original content
-let activeInfo = false; // Flag to track the state
+let activeInfo = false; // Flag to track the state of infoBox
+export let playerLives: number = 5;
+let mysteryWordTracker: string = "";
+let gameOver = false;
+let playerWon = false;
 
 /**
  * Generates a random word from the provided array of words.
  *
- * @param {Words[]} wordsArray - An array of word objects, each containing a 'word' and a 'category'.
- * @returns {Words} An object containing a randomly selected word and its category.
+ * @param {Words[]} wordsArray - An array of word objects, each containing a 'word' and a 'hint'.
+ * @returns {Words} An object containing a randomly selected word and its hint.
  */
 export const getRandomWord = (wordsArray: Word[]): Word => {
   const randomIndex = Math.floor(Math.random() * wordsArray.length);
@@ -38,25 +41,26 @@ export const generateMysteryWord = (mysteryWord: Word): string => {
  * replaces each letter with an underscore using {@link generateMysteryWord},
  * and updates the inner HTML of the element with this new string.
  *
- * @param {HTMLElement} wordBox - The HTML element where the mystery word is to be displayed.
+ * @param {HTMLElement} wordBox - The HTML element where the mystery word is displayed.
  */
 export const updateMysteryWord = (wordBox: HTMLElement) => {
   const randomWord = getRandomWord(wordsArray);
   currentWord = randomWord; // Update the global variable
   const hiddenWord = generateMysteryWord(randomWord);
   wordBox.innerHTML = hiddenWord;
+  mysteryWordTracker = hiddenWord;
 };
 
 /**
- * Retrieves the category of the current word as a hint.
- * This function checks if a current word is set and returns its category as a hint.
+ * Retrieves the hint for the current word.
+ * This function checks if a current word is set and returns its hint as a hint.
  * Otherwise, it returns a default message indicating that no word is available.
  *
- * @returns {string} The category of the current word as a hint, or a default message.
+ * @returns {string} The hint for the current word, or a default message.
  */
 export const getHint = (): string => {
   if (currentWord) {
-    return currentWord.category;
+    return currentWord.hint;
   } else {
     return "No word selected yet.";
   }
@@ -64,89 +68,144 @@ export const getHint = (): string => {
 
 /**
  * Displays a hint in the hintBox element.
- * This function calls {@link getHint} to retrieve the current word's category
+ * This function calls {@link getHint} to retrieve the current word's hint
  * and updates the innerHTML of the hint output element.
+ * It also deducts player's life and disables hint button.
  *
+ * @param finish comment
+ * @param finish comment
  * @param {HTMLOutputElement} hintBox - The HTML output element where the hint is to be displayed.
  */
-export const displayHint = (hintBox: HTMLOutputElement) => {
+export const displayHint = (
+  hintBox: HTMLOutputElement,
+  livesContainer: NodeListOf<HTMLElement>,
+  hintButton: HTMLButtonElement,
+  hangmanPicture: HTMLElement
+) => {
   hintBox.innerHTML = `${getHint()}`;
-};
-
-// TO DO!!
-// Clear content of hintBox and global variables //  work in progress
-export const startGame = (hintBox: HTMLOutputElement) => {
-  currentWord = null;
-  hintBox.innerHTML = "";
-  // Add other functionalities
-  // keyboard's buttons status reset
-};
-
-/**
- * Toggles the display of the game instructions in the infoBox.
- * When called, it replaces the content of infoBox (keyboard) with the game instructions
- * or restores its original content, based on the current state.
- * It also applies or removes specific styles to the infoBox when displaying the instructions.
- * The state is tracked using the 'activeInfo' flag.
- *
- * @param {HTMLElement} infoBox - The HTML element where the game instructions are displayed.
- */
-export const displayInfo = (infoBox: HTMLElement) => {
-  if (!activeInfo) {
-    // Save the original content if it's not already saved
-    if (!originalKeyboardContent) {
-      originalKeyboardContent = infoBox.innerHTML;
-    }
-
-    infoBox.innerHTML = `
-      <p><strong>How to Play Hangman</strong></p><br>
-      <ul>
-        <li>Click a <strong>New Game</strong> to begin.</li>
-        <li><strong>Guess Letters</strong> using on-screen keyboard. Each incorrect guess will deduct one life.</li>
-        <li>If you're stuck, <strong>use the Hint.</strong> Be cautious! Using a hint will cost you one life.</li>
-        <li>You <strong>win</strong> the game if you guess the word fully. Good luck!</li>
-      </ul>`;
-
-    infoBox.style.margin = "1.5rem 2rem";
-    infoBox.style.color = "white";
-    infoBox.style.fontSize = "0.65rem";
-    infoBox.style.textAlign = "justify";
-    activeInfo = true;
-  } else {
-    // Restore the original content
-    infoBox.innerHTML = originalKeyboardContent;
-    infoBox.style.removeProperty("margin");
-    infoBox.style.removeProperty("color");
-    infoBox.style.removeProperty("fontSize");
-    infoBox.style.removeProperty("textAlign");
-    activeInfo = false; // Reset the flag
+  if (currentWord !== null) {
+    playerLives -= 1;
+    livesContainer[playerLives].textContent = "";
+    trackPlayerLives(playerLives, hangmanPicture);
+    hintButton.disabled = true;
+    hintButton.style.opacity = "70%";
+    hintButton.style.cursor = "default";
   }
 };
 
-//handler for new game and info
+// Add function to restart Hangman pictures - TO DO
+export const startGame = (
+  hintBox: HTMLOutputElement,
+  keyboard: NodeListOf<HTMLButtonElement>,
+  wordBox: HTMLElement,
+  livesContainer: NodeListOf<HTMLElement>,
+  messageBox: HTMLElement,
+  hintButton: HTMLButtonElement,
+  hangmanPicture: HTMLElement
+) => {
+  updateMysteryWord(wordBox);
+  playerLives = 5;
+  hintBox.textContent = "";
+  gameOver = false;
+  playerWon = false;
+  messageBox.textContent = "";
+  resetKeyboard(keyboard);
+  restartLives(livesContainer);
+  hintButton.disabled = false;
+  hintButton.style.removeProperty("opacity");
+  hintButton.style.cursor = "pointer";
+  hangmanPicture.innerHTML = `<img class="game__hangman-pic" src="${hangmanImages[playerLives]}" alt="Hangman" />`;
+};
 
-//handler for keyboard click
-// 1. When a button is clicked, check if the letter is in the selected word.
-// 2. Disable the button after it's clicked to prevent repeated guesses of the same letter.
+/**
+ * Resets the lives display to the initial state.
+ * It iterates over each element in {@link livesContainer}.
+ *
+ * @param {NodeListOf<HTMLElement>} livesContainer - HTMLElements representing the player's lives.
+ */
+const restartLives = (livesContainer: NodeListOf<HTMLElement>) => {
+  livesContainer.forEach((element) => {
+    element.textContent = `💚`;
+  });
+};
+
+/**
+ * Toggles the display of game instructions and keyboard buttons.
+ * When active, it shows the instructions and hides the keyboard buttons.
+ * When not, it hides the instructions and shows the keyboard buttons.
+ * The function uses the {@link activeInfo} flag to track the toggle state.
+ *
+ * @param {NodeListOf<HTMLButtonElement>} keyboardButtons - All keyboard button elements.
+ * @param {HTMLElement} instructions - The HTML element with game instructions.
+ */
+export const displayInfo = (
+  keyboardButtons: NodeListOf<HTMLButtonElement>,
+  instructions: HTMLElement,
+  messageBox: HTMLElement
+) => {
+  if (!activeInfo) {
+    instructions.style.display = "flex";
+    messageBox.style.display = "none";
+    activeInfo = true;
+    keyboardButtons.forEach((button) => {
+      button.style.display = "none";
+    });
+  } else {
+    instructions.style.display = "none";
+    messageBox.style.display = "flex";
+    keyboardButtons.forEach((button) => {
+      button.style.display = "";
+    });
+    activeInfo = false;
+  }
+};
+
+/**
+ * Displays the end game message based on based on game's outcome.
+ *
+ * @param {HTMLElement} messageBox - The HTMLElement with end game message.
+ */
+export const displayEndMessage = (messageBox: HTMLElement) => {
+  if (playerWon) {
+    messageBox.textContent = OnScreenMessages.SUCCESS;
+  }
+  if (gameOver) {
+    messageBox.textContent = OnScreenMessages.FAILURE;
+  }
+};
 
 /**
  * Handles the click event on the keyboard buttons.
  * When button is clicked, it checks if the currentWord contains the clicked letter.
  * If it does, the letter is revealed in the wordBox.
- * Otherwise, it handles the incorrect guess (e.g., deducting a life).
- * It also disables the clicked button and modifies its appearance to indicate it's been used.
+ * Otherwise, it handles the incorrect guess and deducts player's life.
+ * It also disables the clicked button.
  *
  * @param {Event} event - The click event triggered by clicking a keyboard button.
  * @param {HTMLElement} wordBox - The HTML element where the mystery word is displayed.
  */
-export const handleKeyboardClick = (event: Event, wordBox: HTMLElement) => {
+export const handleKeyboardClick = (
+  event: Event,
+  wordBox: HTMLElement,
+  livesContainer: NodeListOf<HTMLElement>,
+  messageBox: HTMLElement,
+  hangmanPicture: HTMLElement
+) => {
+  if (playerWon || gameOver) {
+    return;
+  }
   const target = event.currentTarget as HTMLButtonElement;
   if (currentWord !== null) {
     const letter = target.value.toLocaleLowerCase();
     if (currentWord.word.includes(letter)) {
       revealGuessedLetter(letter, currentWord, wordBox);
+      if (playerWon) {
+        displayEndMessage(messageBox);
+      }
     } else {
-      // incorrect guess - deduct one life
+      playerLives -= 1;
+      livesContainer[playerLives].textContent = "";
+      trackPlayerLives(playerLives, hangmanPicture);
     }
     target.disabled = true;
     target.style.opacity = "0%";
@@ -177,6 +236,8 @@ export const revealGuessedLetter = (
     }
   }
   wordBox.innerHTML = displayedWord.join(" ");
+  mysteryWordTracker = wordBox.innerHTML;
+  trackProgress();
 };
 
 /**
@@ -194,10 +255,28 @@ export const resetKeyboard = (keyboard: NodeListOf<HTMLButtonElement>) => {
   });
 };
 
-//update game status
-// 1.     Keep track of correct and incorrect guesses.
-// 3. Update the game__hangman-lives based on incorrect guesses.
+// Add comment
+const trackPlayerLives = (life: number, hangmanPicture: HTMLElement) => {
+  const imageNumber = hangmanImages[life];
+  if (imageNumber) {
+    hangmanPicture.innerHTML = `<img class="game__hangman-pic" src="${hangmanImages[life]}" alt="Hangman" />`;
+  }
 
-// win / lose condition
+  if (life > 0) {
+    trackProgress();
+  } 
+  else {
+    gameOver = true;
+  }
+};
 
-//game restart functionality
+/**
+ * Checks if the player has successfully guessed the mystery word.
+ * This function uses {@link mysteryWordTracker} to check if there are any underscores left.
+ * If no, it sets {@link playerWon} to true.
+ */
+const trackProgress = () => {
+  if (!mysteryWordTracker.includes("_") && mysteryWordTracker !== "") {
+    playerWon = true;
+  }
+};

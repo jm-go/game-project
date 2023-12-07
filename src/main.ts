@@ -1,13 +1,11 @@
 // Imports
 import "./main.scss";
-// "../style.css"; check later which import should stay here
 import {
-  updateMysteryWord,
   displayHint,
-  startGame,
   displayInfo,
   handleKeyboardClick,
-  resetKeyboard
+  startGame,
+  displayEndMessage,
 } from "./gameLogic";
 
 // Selectors
@@ -23,8 +21,19 @@ const infoButton = document.querySelector<HTMLButtonElement>(
 );
 const keyboardContainer =
   document.querySelector<HTMLElement>(".game__keyboard");
-const keyboardButtons = document.querySelectorAll<HTMLButtonElement>(".game__keyboard-button");
+const keyboardButtons = document.querySelectorAll<HTMLButtonElement>(
+  ".game__keyboard-button"
+);
 const wordBox = document.querySelector<HTMLElement>(".game__word");
+const instructions = document.querySelector<HTMLElement>(".game__instructions");
+const livesContainer = document.querySelectorAll<HTMLElement>(
+  ".game__hangman-lives"
+);
+const singleLife = document.querySelectorAll<HTMLElement>(
+  ".game__hangman-life"
+);
+const messageBox = document.querySelector<HTMLElement>(".game__message");
+const hangmanPicture = document.querySelector<HTMLElement>(".game__hangman-image");
 
 // Handle errors for selectors
 if (
@@ -35,29 +44,45 @@ if (
   !infoButton ||
   !keyboardContainer ||
   !keyboardButtons ||
-  !wordBox
+  !wordBox ||
+  !instructions ||
+  !livesContainer ||
+  !singleLife ||
+  !messageBox ||
+  !hangmanPicture
 ) {
   throw new Error("Issue with the selector.");
 }
 
 // Event listeners
-newGame.addEventListener("click", () => updateMysteryWord(mysteryWord)); // Change it later to one listener
-
 hintButton.addEventListener("click", () => {
-  displayHint(hintBox);
+  displayHint(hintBox, singleLife, hintButton, hangmanPicture);
 });
 
 newGame.addEventListener("click", () => {
-  //startGame(hintBox);
-  resetKeyboard(keyboardButtons);
-  // Add other functions necessary to run the game
+  startGame(
+    hintBox,
+    keyboardButtons,
+    wordBox,
+    singleLife,
+    messageBox,
+    hintButton,
+    hangmanPicture
+  );
 });
 
 infoButton.addEventListener("click", () => {
-  displayInfo(keyboardContainer);
-  // Finish implementation
+  displayInfo(keyboardButtons, instructions, messageBox);
 });
 
 keyboardButtons.forEach((button) => {
-  button.addEventListener("click", (event) => handleKeyboardClick(event, wordBox));
+  button.addEventListener("click", (event) =>
+    handleKeyboardClick(event, wordBox, singleLife, messageBox, hangmanPicture)
+  );
 });
+
+keyboardButtons.forEach((button) => {
+  button.addEventListener("click", () => displayEndMessage(messageBox));
+});
+
+hintButton.addEventListener("click", () => displayEndMessage(messageBox));

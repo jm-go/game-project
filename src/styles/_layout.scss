@@ -5,8 +5,7 @@
     justify-content: center;
 
     &__title {
-        font-size: 0.8rem;
-        margin-top: 0.5rem;
+        margin-top: 1rem;
         margin-bottom: 1.5rem;
     }
 }
@@ -16,7 +15,7 @@
     justify-content: center;
 
     &__button {
-        margin: 0.5rem 0.9rem;
+        margin: 0.4rem 0.9rem;
     }
 }
 
@@ -24,6 +23,7 @@
 
     &__hangman {
         display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
     }
@@ -31,11 +31,15 @@
     &__hangman-pic {
         max-width: 100%;
         height: auto;
+        padding-left: 2rem;
+        margin-right: 1rem;
     }
 
     &__hangman-lives {
         display: flex;
         flex-direction: column;
+        min-width: 1.8rem;
+        align-items: flex-start;
     }
 
     &__hangman-life {
@@ -50,11 +54,12 @@
     }
 
     &__keyboard {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
     }
 
     &__keyboard-row {
@@ -66,4 +71,22 @@
     &__keyboard-button {
         margin: 0.13rem;
     }
+
+    &__instructions {
+        position: absolute;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: justify;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    &__message {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    };
 }
