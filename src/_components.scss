@@ -5,9 +5,9 @@
     position: relative;
 
     &__title {
+        font-size: 1rem;
         color: $color-primary;
         font-family: $font-headers-test;
-        margin-top: 2rem;
     }
 }
 
@@ -70,7 +70,7 @@
     position: relative;
 
     &__hangman-pic {
-        margin-top: 2rem;
+        margin-top: 1.5rem;
         margin-right: 1.5rem;
         width: 11rem;
         height: auto;
@@ -121,5 +121,10 @@
         margin-top: 1rem;
     }
 
+    &__message {
+        color: $color-primary;
+        font-family: $font-headers-test;
+        font-size: 1rem;
+    }
 
 }

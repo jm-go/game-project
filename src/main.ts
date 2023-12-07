@@ -6,7 +6,8 @@ import {
   displayInfo,
   handleKeyboardClick,
   startGame,
-  displayWinOrLoseMessage,
+  displayEndMessage,
+  playerLives,
 } from "./gameLogic";
 
 // Selectors
@@ -33,6 +34,9 @@ const livesContainer = document.querySelectorAll<HTMLElement>(
 const singleLife = document.querySelectorAll<HTMLElement>(
   ".game__hangman-life"
 );
+const messageBox = document.querySelector<HTMLElement>(
+  ".game__message"
+);
 
 // Handle errors for selectors
 if (
@@ -46,18 +50,19 @@ if (
   !wordBox ||
   !instructions ||
   !livesContainer ||
-  !singleLife
+  !singleLife ||
+  !messageBox
 ) {
   throw new Error("Issue with the selector.");
 }
 
 // Event listeners
 hintButton.addEventListener("click", () => {
-  displayHint(hintBox);
+  displayHint(hintBox, singleLife);
 });
 
 newGame.addEventListener("click", () => {
-  startGame(hintBox, keyboardButtons, wordBox, singleLife);
+  startGame(hintBox, keyboardButtons, wordBox, singleLife, messageBox);
 });
 
 infoButton.addEventListener("click", () => {
@@ -72,6 +77,7 @@ keyboardButtons.forEach((button) => {
 
 keyboardButtons.forEach((button) => {
   button.addEventListener("click", () =>
-    displayWinOrLoseMessage(keyboardButtons, instructions)
-  );
+    displayEndMessage(messageBox));
 });
+
+hintButton.addEventListener("click", () => displayEndMessage(messageBox));
