@@ -185,6 +185,9 @@ export const handleKeyboardClick = (
   livesContainer: NodeListOf<HTMLElement>,
   messageBox: HTMLElement
 ) => {
+  if (playerWon || gameOver) {
+    return;
+  }
   const target = event.currentTarget as HTMLButtonElement;
   if (currentWord !== null) {
     const letter = target.value.toLocaleLowerCase();
