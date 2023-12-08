@@ -210,7 +210,7 @@ export const revealGuessedLetter = (
 /**
  * Tracks the player's remaining lives and updates the hangman image accordingly.
  * The hangman image is changed based on the number of lives left.
- * It keeps track of player's remaining lives. If no lives are left, it sets the gameOver flag to true.
+ * If no lives are left, it sets the gameOver flag to true.
  * When the game is over, it reveals the full word in the wordBox.
  *
  * @param {number} life - The current number of player's lives.
