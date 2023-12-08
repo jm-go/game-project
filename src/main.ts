@@ -1,6 +1,6 @@
 // Imports
 import "./main.scss";
-import { handleKeyboardClick, startGame, displayHint } from "./game/gameLogic";
+import { handleKeyboardClick, startGame, displayHint} from "./game/gameLogic";
 
 import { displayInfo, displayEndMessage } from "./game/ui";
 
@@ -54,7 +54,7 @@ if (
 
 // Event listeners
 
-// Shows hint, deduct a life, update hangman picture, and disable hint button.
+// Shows hint, deducts a life, updates hangman picture, and disables hint button.
 hintButton.addEventListener("click", () => {
   displayHint(hintBox, singleLife, hintButton, hangmanPicture, wordBox);
 });

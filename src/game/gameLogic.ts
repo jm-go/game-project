@@ -88,7 +88,7 @@ export const displayHint = (
 ) => {
   hintBox.innerHTML = `${getHint()}`;
   if (currentWord !== null) {
-    playerLives -= 1;
+    playerLives--;
     livesContainer[playerLives].textContent = "";
     trackPlayerLives(playerLives, hangmanPicture, wordBox);
     hintButton.disabled = true;
