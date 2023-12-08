@@ -1,12 +1,8 @@
 // Imports
 import "./main.scss";
-import {
-  displayHint,
-  displayInfo,
-  handleKeyboardClick,
-  startGame,
-  displayEndMessage,
-} from "./gameLogic";
+import { handleKeyboardClick, startGame, displayHint} from "./game/gameLogic";
+
+import { displayInfo, displayEndMessage } from "./game/ui";
 
 // Selectors
 const mysteryWord = document.querySelector<HTMLElement>(".game__word");
@@ -33,7 +29,9 @@ const singleLife = document.querySelectorAll<HTMLElement>(
   ".game__hangman-life"
 );
 const messageBox = document.querySelector<HTMLElement>(".game__message");
-const hangmanPicture = document.querySelector<HTMLElement>(".game__hangman-image");
+const hangmanPicture = document.querySelector<HTMLElement>(
+  ".game__hangman-image"
+);
 
 // Handle errors for selectors
 if (
@@ -55,10 +53,13 @@ if (
 }
 
 // Event listeners
+
+// Shows hint, deducts a life, updates hangman picture, and disables hint button.
 hintButton.addEventListener("click", () => {
-  displayHint(hintBox, singleLife, hintButton, hangmanPicture);
+  displayHint(hintBox, singleLife, hintButton, hangmanPicture, wordBox);
 });
 
+// Resets the game to its initial state.
 newGame.addEventListener("click", () => {
   startGame(
     hintBox,
@@ -71,18 +72,22 @@ newGame.addEventListener("click", () => {
   );
 });
 
+// Toggles display of instructions and hide/show keyboard and message box.
 infoButton.addEventListener("click", () => {
   displayInfo(keyboardButtons, instructions, messageBox);
 });
 
+// Handles keyboard button click.
 keyboardButtons.forEach((button) => {
   button.addEventListener("click", (event) =>
     handleKeyboardClick(event, wordBox, singleLife, messageBox, hangmanPicture)
   );
 });
 
+// Displays end game message when a keyboard button is clicked and conditions met.
 keyboardButtons.forEach((button) => {
   button.addEventListener("click", () => displayEndMessage(messageBox));
 });
 
+// Displays end game message when hint button is clicked and player loses the game.
 hintButton.addEventListener("click", () => displayEndMessage(messageBox));
