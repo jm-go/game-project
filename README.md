@@ -2,7 +2,7 @@
 
 ## **Introduction**
 
-**Welcome to my Hangman Game**. This game is a _nology course project. Hangman is a web-based application where players guess letters to form a word. It features a user-friendly interface, hints, and a visual representation of the player's remaining lives. The project is also live, deployed on GitHub Pages.
+**Welcome to my Hangman Game**. This game is a \_nology course project. Hangman is a web-based application where players guess letters to form a word. It features a user-friendly interface, hints, and a visual representation of the player's remaining lives. The project is also live, deployed on GitHub Pages.
 
 [View Live Hangman](https://jm-go.github.io/game-project/)
 
@@ -36,25 +36,24 @@ Alternatively, view the live version deployed on GitHub Pages at [View Live Hang
 
 Below is the file structure of the project.
 
-
-```bash 
+```bash
 /src
-├── assets/ 
+├── assets/
 ├── data/
-│ └── data.ts 
+│ └── data.ts
 ├── game/
-│ ├── gameLogic.ts 
-│ ├── ui.ts 
-│ └── utils.ts 
+│ ├── gameLogic.ts
+│ ├── ui.ts
+│ └── utils.ts
 ├── styles/
-│ ├── _animation.scss 
-│ ├── _components.scss 
-│ ├── _layout.scss 
-│ └── _variables.scss 
-├── main.ts 
-├── main.scss 
-├── README.md 
-└── index.html 
+│ ├── _animation.scss
+│ ├── _components.scss
+│ ├── _layout.scss
+│ └── _variables.scss
+├── main.ts
+├── main.scss
+├── README.md
+└── index.html
 ```
 
 ## **Usage**
@@ -80,17 +79,25 @@ Open the web application in your browser. You will be presented with a game's in
 ## **Game Preview**
 
 ### New Game Interface
-![New Game Interface](src/assets/newgame.png)
-*The main interface of the game showing the hangman, word to guess, keyboard, and lives.*
+
+<p align="center">
+  <img src="src/assets/newgame.png" alt="New Game Interface" width="300"><br>
+  <em>The main interface of the game showing the hangman, word to guess, keyboard, and lives.</em>
+</p>
 
 ### Show Info Example
-![Show Info Example](src/assets/gameinfo.png)
-*Example of the show info scenario, game's instructions overlay the keyboard section.*
+
+<p align="center">
+  <img src="src/assets/gameinfo.png" alt="Show Info Example" width="300"><br>
+  <em>Example of the show info scenario, game's instructions overlay the keyboard section.</em>
+</p>
 
 ### Gameplay Example - Player's Failure
-![Gameplay Example](src/assets/youlost.png)
-*Example of the failure scenario, showcasing the keyboard interaction and displayed solution.*
 
+<p align="center">
+  <img src="src/assets/youlost.png" alt="Gameplay Example" width="300"><br>
+  <em>Example of the failure scenario, showcasing the keyboard interaction and displayed solution.</em>
+</p>
 
 ## **Licence**
 
