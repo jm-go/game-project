@@ -29,8 +29,8 @@ export const wordsArray: Word[] = [
   { word: "philosophy", hint: "Wisdom's pursuit" }, 
   { word: "biotechnology", hint: "Science meets nature" }, 
   { word: "antioxidant", hint: "Prevents oxidation" },
-  { word: "cartography", hint: "Explorer's guide" }, 
-  { word: "microscope", hint: "Magnifies small objects" },
+  { word: "marathon", hint: "Long race" }, 
+  { word: "zephyr", hint: "Gentle breeze" },
   { word: "revolutionary", hint: "Radical change agent" }, 
   { word: "sustainability", hint: "Eco-friendly practice" },
   { word: "dandelion", hint: "Wishful wildflower" },
@@ -52,6 +52,6 @@ export const hangmanImages: HangmanImages = {
 };
 
 export enum OnScreenMessages {
-  SUCCESS = `Congratulations, you won!`,
-  FAILURE = `You lost!`,
+  SUCCESS = "Congratulations, you won!",
+  FAILURE = "You lost!",
 }

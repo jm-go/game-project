@@ -131,7 +131,7 @@ export const startGame = (
   hintButton.disabled = false;
   hintButton.style.removeProperty("opacity");
   hintButton.style.cursor = "pointer";
-  hangmanPicture.innerHTML = `<img class="game__hangman-pic" src="${hangmanImages[playerLives]}" alt="Hangman" />`;
+  hangmanPicture.src = hangmanImages[playerLives];
 };
 
 /**
