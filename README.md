@@ -81,21 +81,21 @@ Open the web application in your browser. You will be presented with a game's in
 ### New Game Interface
 
 <p align="center">
-  <img src="src/assets/newgame.png" alt="New Game Interface" width="300"><br>
+  <img src="src/assets/newgame.png" alt="New Game Interface" width="400"><br>
   <em>The main interface of the game showing the hangman, word to guess, keyboard, and lives.</em>
 </p>
 
 ### Show Info Example
 
 <p align="center">
-  <img src="src/assets/gameinfo.png" alt="Show Info Example" width="300"><br>
+  <img src="src/assets/gameinfo.png" alt="Show Info Example" width="400"><br>
   <em>Example of the show info scenario, game's instructions overlay the keyboard section.</em>
 </p>
 
 ### Gameplay Example - Player's Failure
 
 <p align="center">
-  <img src="src/assets/youlost.png" alt="Gameplay Example" width="300"><br>
+  <img src="src/assets/youlost.png" alt="Gameplay Example" width="400"><br>
   <em>Example of the failure scenario, showcasing the keyboard interaction and displayed solution.</em>
 </p>
 
