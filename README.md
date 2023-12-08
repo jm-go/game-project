@@ -80,15 +80,15 @@ Open the web application in your browser. You will be presented with a game's in
 ## **Game Preview**
 
 ### New Game Interface
-![New Game Interface](../src/assets/newgame.png)
+![New Game Interface](src/assets/newgame.png)
 *The main interface of the game showing the hangman, word to guess, keyboard, and lives.*
 
 ### Show Info Example
-![Show Info Example](../src/assets/gameinfo.png)
+![Show Info Example](src/assets/gameinfo.png)
 *Example of the show info scenario, game's instructions overlay the keyboard section.*
 
 ### Gameplay Example - Player's Failure
-![Gameplay Example](../src/assets/youlost.png)
+![Gameplay Example](src/assets/youlost.png)
 *Example of the failure scenario, showcasing the keyboard interaction and displayed solution.*
 
 
