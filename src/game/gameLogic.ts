@@ -76,14 +76,14 @@ export const getHint = (): string => {
  * @param {HTMLOutputElement} hintBox - The HTML output element that displays hint.
  * @param {NodeListOf<HTMLElement>} livesContainer - Contains elements representing player's lives.
  * @param {HTMLButtonElement} hintButton - The button used to trigger the display of a hint.
- * @param {HTMLElement} hangmanPicture - The HTML element displaying the current state of the hangman.
+ * @param {HTMLImageElement} hangmanPicture - The HTML image element displaying the current state of the hangman.
  * @param {HTMLElement} wordBox - The HTML element displaying the current state of the mystery word.
  */
 export const displayHint = (
   hintBox: HTMLOutputElement,
   livesContainer: NodeListOf<HTMLElement>,
   hintButton: HTMLButtonElement,
-  hangmanPicture: HTMLElement,
+  hangmanPicture: HTMLImageElement,
   wordBox: HTMLElement
 ) => {
   hintBox.innerHTML = `${getHint()}`;
@@ -109,7 +109,7 @@ export const displayHint = (
  * @param {NodeListOf<HTMLElement>} livesContainer - Contains elements representing player's lives.
  * @param {HTMLElement} messageBox - The HTML element used to display end game messages.
  * @param {HTMLButtonElement} hintButton - The button element used to display a hint.
- * @param {HTMLElement} hangmanPicture - The HTML element displaying the hangman image.
+ * @param {HTMLImageElement} hangmanPicture - The HTML image element displaying the hangman image.
  */
 export const startGame = (
   hintBox: HTMLOutputElement,
@@ -118,7 +118,7 @@ export const startGame = (
   livesContainer: NodeListOf<HTMLElement>,
   messageBox: HTMLElement,
   hintButton: HTMLButtonElement,
-  hangmanPicture: HTMLElement
+  hangmanPicture: HTMLImageElement
 ) => {
   updateMysteryWord(wordBox);
   playerLives = 5;
@@ -146,14 +146,14 @@ export const startGame = (
  * @param {HTMLElement} wordBox - The HTML element where the mystery word is displayed.
  * @param {NodeListOf<HTMLElement>} livesContainer - HTMLElements representing the player's remaining lives.
  * @param {HTMLElement} messageBox - The HTMLElement where the end game message is displayed.
- * @param {HTMLElement} hangmanPicture - The HTMLElement where the hangman image is displayed.
+ * @param {HTMLImageElement} hangmanPicture - The HTML image element with the hangman picture.
  */
 export const handleKeyboardClick = (
   event: Event,
   wordBox: HTMLElement,
   livesContainer: NodeListOf<HTMLElement>,
   messageBox: HTMLElement,
-  hangmanPicture: HTMLElement
+  hangmanPicture: HTMLImageElement
 ) => {
   if (playerWon || gameOver) {
     return;
@@ -209,22 +209,21 @@ export const revealGuessedLetter = (
 
 /**
  * Tracks the player's remaining lives and updates the hangman image accordingly.
- * The hangman image is changed based on the number of lives left.
- * It keeps track of player's remaining lives. If no lives are left, it sets the gameOver flag to true.
+ * The hangman picture is changed based on the number of lives left.
+ * If no lives are left, it sets the gameOver flag to true.
  * When the game is over, it reveals the full word in the wordBox.
  *
  * @param {number} life - The current number of player's lives.
- * @param {HTMLElement} hangmanPicture - The HTML element with the hangman image.
+ * @param {HTMLImageElement} hangmanPicture - The HTML image element with the hangman picture.
  * @param {HTMLElement} wordBox - The HTML element with the mystery word.
  */
 const trackPlayerLives = (
   life: number,
-  hangmanPicture: HTMLElement,
+  hangmanPicture: HTMLImageElement,
   wordBox: HTMLElement
 ) => {
-  const imageNumber = hangmanImages[life];
-  if (imageNumber) {
-    hangmanPicture.innerHTML = `<img class="game__hangman-pic" src="${hangmanImages[life]}" alt="Hangman" />`;
+  if (hangmanPicture) {
+    hangmanPicture.src = hangmanImages[life];
   }
 
   if (life > 0) {

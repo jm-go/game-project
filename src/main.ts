@@ -29,8 +29,8 @@ const singleLife = document.querySelectorAll<HTMLElement>(
   ".game__hangman-life"
 );
 const messageBox = document.querySelector<HTMLElement>(".game__message");
-const hangmanPicture = document.querySelector<HTMLElement>(
-  ".game__hangman-image"
+const hangmanPicture = document.querySelector<HTMLImageElement>(
+  ".game__hangman-pic"
 );
 
 // Handle errors for selectors
