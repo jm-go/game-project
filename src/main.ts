@@ -1,12 +1,8 @@
 // Imports
 import "./main.scss";
-import {
-  displayHint,
-  displayInfo,
-  handleKeyboardClick,
-  startGame,
-  displayEndMessage,
-} from "./gameLogic";
+import { handleKeyboardClick, startGame, displayHint } from "./game/gameLogic";
+
+import { displayInfo, displayEndMessage } from "./game/ui";
 
 // Selectors
 const mysteryWord = document.querySelector<HTMLElement>(".game__word");

@@ -1,13 +1,14 @@
 // Imports
-import { Word, wordsArray, hangmanImages, OnScreenMessages } from "./data/data";
+import { Word, wordsArray, hangmanImages } from "../data/data";
+import { displayEndMessage } from "./ui";
+import { resetKeyboard, restartLives } from "./utils";
 
 // Global variables
-let currentWord: Word | null = null; // Holds the current word object from the words array.
-let activeInfo = false; // Tracks whether the info overlay is active.
+export let currentWord: Word | null = null; // Holds the current word object from the words array.
 export let playerLives: number = 5; // Player's remaining lives, initialised to 5.
 let mysteryWordTracker: string = ""; // Tracks the current state of the displayed mystery word.
-let gameOver = false; // Flag to indicate if the game is over.
-let playerWon = false; // Flag to indicate if the player has won.
+export let gameOver = false; // Flag to indicate if the game is over.
+export let playerWon = false; // Flag to indicate if the player has won.
 
 /**
  * Generates a random word from the provided array of words.
@@ -134,68 +135,6 @@ export const startGame = (
 };
 
 /**
- * Resets the lives display to the initial state.
- * It iterates over each element in livesContainer.
- *
- * @param {NodeListOf<HTMLElement>} livesContainer - HTMLElements representing the player's lives.
- */
-const restartLives = (livesContainer: NodeListOf<HTMLElement>) => {
-  livesContainer.forEach((element) => {
-    element.textContent = `💚`;
-  });
-};
-
-/**
- * Toggles the display of game instructions and keyboard buttons.
- * When activated, it displays the game instructions while hiding
- * the keyboard buttons and the end game message if such is being displayed.
- * When deactivated, it hides the instructions and displays both the keyboard buttons and the end game message.
- * The function uses the {@link activeInfo} flag to track the toggle status.
- *
- * @param {NodeListOf<HTMLButtonElement>} keyboardButtons - All keyboard button elements.
- * @param {HTMLElement} instructions - The HTML element containing the game instructions.
- * @param {HTMLElement} messageBox - The HTML element used for displaying the game message.
- */
-export const displayInfo = (
-  keyboardButtons: NodeListOf<HTMLButtonElement>,
-  instructions: HTMLElement,
-  messageBox: HTMLElement
-) => {
-  if (!activeInfo) {
-    instructions.style.display = "flex";
-    messageBox.style.display = "none";
-    activeInfo = true;
-    keyboardButtons.forEach((button) => {
-      button.style.display = "none";
-    });
-  } else {
-    instructions.style.display = "none";
-    messageBox.style.display = "flex";
-    keyboardButtons.forEach((button) => {
-      button.style.display = "";
-    });
-    activeInfo = false;
-  }
-};
-
-/**
- * Displays the end game message depending on the game's outcome.
- * If the player has won (playerWon is true), it displays a success message.
- * If the game is over (gameOver is true), it displays a failure message.
- * The message content is retrieved from the OnScreenMessages object.
- *
- * @param {HTMLElement} messageBox - The HTMLElement used for displaying end game messages.
- */
-export const displayEndMessage = (messageBox: HTMLElement) => {
-  if (playerWon) {
-    messageBox.textContent = OnScreenMessages.SUCCESS;
-  }
-  if (gameOver) {
-    messageBox.textContent = OnScreenMessages.FAILURE;
-  }
-};
-
-/**
  * Handles the click event on the keyboard buttons.
  * It checks if the clicked letter is part of the current mystery word.
  * If it is, the letter is revealed in the wordBox.
@@ -266,21 +205,6 @@ export const revealGuessedLetter = (
   wordBox.innerHTML = displayedWord.join(" ");
   mysteryWordTracker = wordBox.innerHTML;
   trackProgress();
-};
-
-/**
- * Resets the state of all keyboard buttons to their default.
- * This function iterates over each button in the provided NodeList and re-enables them.
- * It also removes any styles related applied when the buttons were disabled.
- *
- * @param {NodeListOf<HTMLButtonElement>} keyboard - A NodeList representing the keyboard buttons.
- */
-export const resetKeyboard = (keyboard: NodeListOf<HTMLButtonElement>) => {
-  keyboard.forEach((button) => {
-    button.disabled = false;
-    button.style.removeProperty("opacity");
-    button.style.removeProperty("cursor");
-  });
 };
 
 /**
