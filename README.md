@@ -61,19 +61,12 @@ Below is the file structure of the project.
 Open the web application in your browser. You will be presented with a game's interface. Here's how to use it:
 
 1. **Starting the Game**: Click the **"New Game"** button to start a new game.
-
 2. **Guessing Letters**: Use the on-screen keyboard to guess letters. Correct guesses reveal the letter; incorrect guesses remove one heart.
-
 3. **Using Hints**: **"Hint"** button reveals a clue but costs one life. The hint button gets disabled after use to prevent repeated use in the same game.
-
 4. **Tracking Lives**: Each incorrect guess results in the loss of one heart. Losing all hearts means game over.
-
 5. **Winning the Game**: Win by guessing all letters in the mystery word correctly. "You won" message is displayed.
-
 6. **Game Over**: The game ends if all lives are lost before guessing the word. "You lost" message is displayed, and the solution is revealed.
-
 7. **Viewing Instructions**: Click the **"Info"** button to access game instructions. This action hides the keyboard and shows the instructions overlay. Click again to return to the game.
-
 8. **Restart at Any Time**: A "New Game" button allows players to restart and initiate a new game at any moment.
 
 ## **Game Preview**
