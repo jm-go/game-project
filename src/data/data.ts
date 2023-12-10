@@ -43,12 +43,12 @@ type HangmanImages = {
 };
 
 export const hangmanImages: HangmanImages = {
-  5: "/game-project/src/assets/hangman-5.png",
-  4: "/game-project/src/assets/hangman-4.png",
-  3: "/game-project/src/assets/hangman-3.png",
-  2: "/game-project/src/assets/hangman-2.png",
-  1: "/game-project/src/assets/hangman-1.png",
-  0: "/game-project/src/assets/hangman-0.png",
+  5: "./game-project/src/assets/hangman-5.png",
+  4: "./game-project/src/assets/hangman-4.png",
+  3: "./game-project/src/assets/hangman-3.png",
+  2: "./game-project/src/assets/hangman-2.png",
+  1: "./game-project/src/assets/hangman-1.png",
+  0: "./game-project/src/assets/hangman-0.png",
 };
 
 export enum OnScreenMessages {
