@@ -1,7 +1,6 @@
 // Imports
 import "./main.scss";
 import { handleKeyboardClick, startGame, displayHint} from "./game/gameLogic";
-
 import { displayInfo, displayEndMessage } from "./game/ui";
 
 // Selectors
@@ -84,7 +83,7 @@ keyboardButtons.forEach((button) => {
   );
 });
 
-// Displays end game message when a keyboard button is clicked and conditions met.
+// Displays end game message when a keyboard button is clicked and conditions are met.
 keyboardButtons.forEach((button) => {
   button.addEventListener("click", () => displayEndMessage(messageBox));
 });

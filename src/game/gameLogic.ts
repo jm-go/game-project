@@ -69,7 +69,7 @@ export const getHint = (): string => {
 
 /**
  * Displays a hint in the hintBox element.
- * This function retrieves the current word's hint with {@link getHint} and updates the content of hintBox.
+ * This function retrieves the current word's hint using {@link getHint} and updates the content of hintBox.
  * It deducts one life from the player, updates the lives display, and adjusts the hangman picture accordingly.
  * The hint button is disabled after use to prevent multiple uses in the same game.
  *
@@ -183,7 +183,7 @@ export const handleKeyboardClick = (
 /**
  * This function updates the displayed hidden word with the correctly guessed letter.
  * It also updates the mysteryWordTracker with the current state of the displayed word.
- * The {@link trackProgress} function checks if the player has successfully guessed the entire word.
+ * The {@link trackProgress} checks if the player has successfully guessed the entire word.
  *
  * @param {string} guessedLetter - The letter guessed by the user.
  * @param {Word} currentWord - The current word object.

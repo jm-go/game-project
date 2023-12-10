@@ -9,7 +9,7 @@ let activeInfo = false; // Tracks whether the info overlay is active.
 /**
  * Toggles the display of game instructions and keyboard buttons.
  * When activated, it displays the game instructions while hiding
- * the keyboard buttons and the end game message if such is being displayed.
+ * the keyboard and the end game message.
  * When deactivated, it hides the instructions and displays both the keyboard buttons and the end game message.
  * The function uses the {@link activeInfo} flag to track the toggle status.
  *

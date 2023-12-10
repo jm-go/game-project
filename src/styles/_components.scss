@@ -7,7 +7,7 @@
     &__title {
         font-size: 1rem;
         color: $color-primary;
-        font-family: $font-headers-test;
+        font-family: $font-headers;
     }
 }
 
@@ -71,7 +71,6 @@
 
     &__hangman-pic {
         margin-top: 1.5rem;
-        //margin-right: 1.5rem;
         width: 12rem;
         height: auto;
         opacity: 80%;
@@ -123,7 +122,7 @@
 
     &__message {
         color: $color-primary;
-        font-family: $font-headers-test;
+        font-family: $font-headers;
         font-size: 1rem;
     }
 
